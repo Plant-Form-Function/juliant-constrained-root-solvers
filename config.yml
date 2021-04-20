@@ -1,0 +1,29 @@
+# meta information for the course
+title: Constrained Root Solvers
+description: Learning constrained root solvers in Julia
+template:
+  repo: juliant-template
+  name: learn-constrained-root-solvers
+  description: Learning constrained root solvers in Julia
+
+# create a new issue after cloning the repository
+before:
+  - type: createIssue
+    title: Learning ConstrainedRootSolvers.jl
+    body: 00-new-issue.md
+
+steps:
+  - title: Install ConstrainedRootSolvers
+    description: Initialize the project and add ConstrainedRootSolvers
+    event: pull_request
+    link: '{{ repoUrl }}'
+    actions:
+      - type: gate
+        left: '%payload.pull_request.title%'
+        operator: ===
+        right: add ConstrainedRootSolvers
+        else:
+          - type: respond
+            with: 01_fail.md
+      - type: respond
+        with: 01_succeed.md
