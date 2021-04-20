@@ -13,6 +13,7 @@ before:
     body: 00-new-issue.md
 
 steps:
+  # 1. install the package to the project
   - title: Install ConstrainedRootSolvers
     description: Initialize the project and add ConstrainedRootSolvers
     event: pull_request
@@ -24,6 +25,15 @@ steps:
         right: add ConstrainedRootSolvers
         else:
           - type: respond
-            with: 01_fail.md
+            with: 01-fail.md
       - type: respond
-        with: 01_succeed.md
+        with: 01-succeed.md
+  # 2. enable the branch protection
+  - title: Enable Branch Protection
+    description: Add branch protection rule to main
+    event: commit_comment
+    link: '{{ repoUrl }}'
+    actions:
+      - type: respond
+        with: 02-info.md
+  # 3. define and export a few functions to test
